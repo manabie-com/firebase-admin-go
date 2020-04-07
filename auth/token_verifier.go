@@ -46,7 +46,7 @@ const (
 	clockSkewSeconds                 = 300
 )
 
-// tokenVerifier verifies different types of Firebase token strings, including ID tokens and
+// TokenVerifier verifies different types of Firebase token strings, including ID tokens and
 // session cookies.
 type TokenVerifier struct {
 	shortName         string
