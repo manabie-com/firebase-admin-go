@@ -83,12 +83,12 @@ func NewClient(ctx context.Context, conf *internal.AuthConfig) (*Client, error) 
 		}
 	}
 
-	idTokenVerifier, err := newIDTokenVerifier(ctx, conf.ProjectID)
+	idTokenVerifier, err := NewIDTokenVerifier(ctx, conf.ProjectID, defaultIDTokenIssuerPrefix, defaultIDTokenCertURL)
 	if err != nil {
 		return nil, err
 	}
 
-	cookieVerifier, err := newSessionCookieVerifier(ctx, conf.ProjectID)
+	cookieVerifier, err := NewSessionCookieVerifier(ctx, conf.ProjectID, defaultSessionCookieIssuerPrefix, defaultSessionCookieCertURL)
 	if err != nil {
 		return nil, err
 	}
@@ -229,8 +229,8 @@ type baseClient struct {
 	projectID              string
 	tenantID               string
 	httpClient             *internal.HTTPClient
-	idTokenVerifier        *tokenVerifier
-	cookieVerifier         *tokenVerifier
+	idTokenVerifier        *TokenVerifier
+	cookieVerifier         *TokenVerifier
 }
 
 func (c *baseClient) withTenantID(tenantID string) *baseClient {
